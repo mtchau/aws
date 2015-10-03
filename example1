@@ -1,0 +1,18 @@
+$ python
+Python 2.7.9 (default, Feb 10 2015, 03:29:10) 
+[GCC 4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import boto
+>>> import boto.sqs
+>>> conn=boto.sqs.connect_to_region('us-west-1')
+>>> q=conn.create_queue('MyNewQ')
+>>> from boto.sqs.message import Message
+>>> m=Message(body='Cats like python')
+>>> q.write(m)
+<boto.sqs.message.Message object at 0x109b51ad0>
+>>> q.count()
+1
+>>> msg=q.get_messages()[0]
+>>> msg.get_body()
+u'Cats like python'
+>>> 
